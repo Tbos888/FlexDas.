@@ -222,6 +222,42 @@
             animation: fadeIn 2s ease-out;
         }
 
+        /* ส่วนจัดวางและแอนิเมชันของปุ่มลูกศรเลื่อนลง */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .scroll-down a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            animation: bounce-arrow 2s infinite ease-in-out;
+        }
+
+        .scroll-down svg path {
+            transition: stroke var(--transition-speed);
+        }
+
+        /* เมื่อเอาเมาส์มาชี้ ลูกศรจะเรืองแสงสีขาวสว่างขึ้น */
+        .scroll-down a:hover svg path {
+            stroke: var(--text-primary);
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes bounce-arrow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
         /* ----------------------------------
            5. ABOUT & SKILLS (Developer Portfolio)
         ------------------------------------- */
@@ -442,6 +478,15 @@
                 </a>
             </div>
         </div>
+        
+        <!-- แทรกปุ่มลูกศรเลื่อนลง (Scroll Down Arrow) -->
+        <div class="scroll-down">
+            <a href="#about" aria-label="เลื่อนลงเพื่อดูส่วนข้อมูลผู้พัฒนา">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 9L12 15L18 9" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
     </section>
 
     <!-- 3. ABOUT & SKILLS SECTION -->
@@ -515,7 +560,7 @@
     <!-- 6. FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 FLEXDAS. DEVELOPED BY FLEXDAS. ALL RIGHTS RESERVED.</p>
+            <p>&copy; 2026 FLEXDAS. FlexDas BY Tbos.</p>
         </div>
     </footer>
 
