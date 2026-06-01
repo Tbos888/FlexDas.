@@ -1,16 +1,26 @@
--- =================================================================
---                     FLEXDAS HUB (MAIN SCRIPT)
--- =================================================================
+local HttpService = game:GetService("HttpService")
+local v14;
 
--- 1. เรียกใช้งานหน้าตาเมนูหลัก (Fluent UI Library) แก้ไขลิงก์ถูกต้องแล้ว
-local v14 = loadstring(game:HttpGet("https://githubusercontent.com"))();
+local success, result = pcall(function()
+    return request({
+        Url = "https://githubusercontent.com",
+        Method = "GET"
+    }).Body
+end)
+
+if success and result then
+    v14 = loadstring(result)()
+else
+    -- หากยังดึงไม่ได้ ให้ใช้คำสั่งดึงข้อมูลมาตรฐานของตัวรันตัวอื่น
+    v14 = loadstring(game:HttpGetAsync("https://githubusercontent.com"))()
+end
 
 -- 2. สร้างหน้าต่างเมนูหลักของค่ายคุณ
 local v15 = v14:CreateWindow({
     Title = "FlexDas Hub",
     SubTitle = "Blox Fruits",
     TabWidth = 160,
-    Theme = "Dark", -- สีดาร์กโหมด
+    Theme = "Dark",
     Acrylic = false,
     Size = UDim2.fromOffset(580, 460),
     MinimizeKey = Enum.KeyCode.End
@@ -20,22 +30,20 @@ local v15 = v14:CreateWindow({
 local v16 = {
     Home = v15:AddTab({
         Title = "Thong Tin",
-        Icon = "info" -- ใส่ไอคอนรูปข้อมูลให้สวยงาม
+        Icon = "info" 
     }),
     Main = v15:AddTab({
         Title = "ฟังก์ชันหลัก",
-        Icon = "sword" -- แท็บรองรับสำหรับทำระบบฟาร์มต่อ
+        Icon = "sword" 
     })
 };
 
--- แจ้งเตือนเมื่อสคริปต์รันสำเร็จ
 v14:Notify({
     Title = "FlexDas Hub",
     Content = "สคริปต์เปิดใช้งานสำเร็จแล้ว!",
     Duration = 5
 });
 
--- ใส่เนื้อหาทักทายในหน้าแรก (Thong Tin)
 v16.Home:AddParagraph({
     Title = "ยินดีต้อนรับสู่ FlexDas Hub",
     Content = "สคริปต์นี้ได้รับการจัดการระบบโดย FlexDas"
